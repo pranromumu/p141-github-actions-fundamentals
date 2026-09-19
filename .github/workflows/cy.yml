@@ -1,17 +1,21 @@
 name: CI
+
 on: [push]
+
 jobs:
-    test:
-        runs-on:ubuntu-latest
-        steps:
-            - name:Checkout responsibility
-              users:action/checkout@v4
-            - name: setup python
-              users: actions/setup-python@v5
-              with:
-                python-version: '3.12'
-            - name: install dependencies
-              run: pip instal pytest
-              
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
+      - name: Install dependencies
+        run: pip install pytest
+
+      - name: Run Pytest
+        run: pytest -v
